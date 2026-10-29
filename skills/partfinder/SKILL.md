@@ -73,6 +73,30 @@ Sentences you can relay as they are:
 - **Plain REST.** JSON in, JSON out, one Bearer header. The guides at https://docs.partfinder.dev
   have curl, TypeScript and Python examples.
 
+## Connect over MCP
+
+The PartFinder MCP server serves the same operations as tools, each named by its operation id
+(`researchPart` is `GET /v1/parts`). A tool call is the matching API call: same credits, same rate
+limit. Setup for each agent: https://docs.partfinder.dev/mcp-server
+
+- Server address: `https://api.partfinder.dev/mcp`
+- Header: `Authorization: Bearer <key>`, with the key read from the `PARTFINDER_API_KEY` environment
+  variable.
+
+To connect it for your person:
+
+1. You may write the agent's MCP configuration yourself, such as a project's `.mcp.json`, as long as
+   it only refers to the variable: `"Authorization": "Bearer ${PARTFINDER_API_KEY}"`.
+2. Never ask for the key in the chat and never write the key into a file. Never put it in a
+   `claude mcp add` command either: the shell replaces `$PARTFINDER_API_KEY` with the key, and the
+   key is then stored in the configuration.
+3. Tell your person the two steps only they can take: set `PARTFINDER_API_KEY` in their environment,
+   and approve the server.
+
+Over MCP, a job tool (`searchParts`, `compareParts`, `analyzeBom`) answers with the job's `id` and the
+seconds to wait. Then call `getSearch`, `getComparison` or `getBom` with that `id` until `status` is no
+longer `processing`.
+
 ## Example: research a part
 
 ```bash
