@@ -3,7 +3,10 @@
   "displayName": "PartFinder",
   "version": "1.0.0",
   "description": "Lets Claude use the PartFinder API to check stock and lead times, get supply-chain risk scores, find alternate parts, search for parts, compare specs, scan a BOM for risk, read disruption events and send requests for quote.",
-  "author": { "name": "PartFinder Inc.", "url": "https://partfinder.dev" },
+  "author": {
+    "name": "PartFinder Inc.",
+    "url": "https://partfinder.dev"
+  },
   "homepage": "https://docs.partfinder.dev/agent-skills",
   "license": "MIT"
 }
