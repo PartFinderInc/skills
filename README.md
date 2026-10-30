@@ -22,7 +22,7 @@ Create an account at [console.partfinder.dev/sign-up](https://console.partfinder
 
 The plugin is a skill: it is made only of instructions. It runs no code and stores nothing.
 
-When you use it, your agent sends your requests to the PartFinder API at https://api.partfinder.dev with your own API key, sent in the Authorization header. Depending on the request, that includes part numbers and manufacturers, BOM lines or an uploaded BOM file, search queries, and, for a request for quote, the supplier's email address and the message.
+When you use it, your agent sends your requests to the PartFinder API at https://api.partfinder.dev with your own API key, sent in the Authorization header. Depending on the request, that includes part numbers and manufacturers, a buyer's country, BOM lines or an uploaded BOM file, search queries, and, for a request for quote, the requester's name, company and title, the supplier's name and email address, quantities, dates, an email address for reply notices, and the messages, including your replies to the supplier.
 
 See the [privacy policy](https://partfinder.dev/privacy) for how PartFinder handles that data.
 
