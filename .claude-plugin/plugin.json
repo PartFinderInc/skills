@@ -7,6 +7,11 @@
     "name": "PartFinder Inc.",
     "url": "https://partfinder.dev"
   },
-  "homepage": "https://docs.partfinder.dev/agent-skills",
+  "homepage": "https://partfinder.dev/api",
+  "documentationUrl": "https://docs.partfinder.dev/agent-skills",
+  "repository": "https://github.com/PartFinderInc/skills",
+  "supportUrl": "mailto:support@partfinder.dev",
+  "privacyPolicyUrl": "https://partfinder.dev/privacy",
+  "termsOfServiceUrl": "https://partfinder.dev/terms",
   "license": "MIT"
 }
