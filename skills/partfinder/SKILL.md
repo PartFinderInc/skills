@@ -256,6 +256,9 @@ Every error body has `error`, and usually a `summary` to relay, except a `413`, 
   `X-RateLimit-Remaining` and `X-RateLimit-Reset` headers on answers to a valid key show what is left.
 - **403** (`key_not_allowed`): a key made for one of an organization's customers called an
   endpoint only the organization's own keys may call, such as `/v1/keys`. Not retryable with that key.
+- **403** (`insufficient_scope`, `app_disconnected`, over MCP after a sign-in): the app lacks the
+  permission the call needs, or was disconnected in the console. Relay the `summary`. Retry only after
+  your person connects the app again and allows it, or allows the app again in the console.
 - **413**: the uploaded file is too large to send (a request body over 4.5 MB), and the answer has
   no body. Do not retry it as is; split the file and upload the parts.
 - **400, 404, 409, 422**: not retryable as sent. Relay the `summary`; it says what to change.
