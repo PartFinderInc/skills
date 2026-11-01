@@ -80,22 +80,28 @@ The PartFinder MCP server serves the same operations as tools, each named by its
 limit. Setup for each agent: https://docs.partfinder.dev/mcp-server
 
 - Server address: `https://api.partfinder.dev/mcp`
-- Header: `Authorization: Bearer <key>`, with the key read from the `PARTFINDER_API_KEY` environment
-  variable.
+- Sign-in: your person adds the server with no key and no header. The agent opens the PartFinder
+  sign-in page, where your person chooses an organization and approves two permissions: read (looking
+  things up, which uses credits) and write (starting searches, comparisons and BOM analyses, and sending
+  or deleting requests for quote).
 
 To connect it for your person:
 
-1. You may write the agent's MCP configuration yourself, such as a project's `.mcp.json`, as long as
-   it only refers to the variable: `"Authorization": "Bearer ${PARTFINDER_API_KEY}"`.
-2. Never ask for the key in the chat and never write the key into a file. Never put it in a
-   `claude mcp add` command either: the shell replaces `$PARTFINDER_API_KEY` with the key, and the
-   key is then stored in the configuration.
-3. Tell your person the two steps only they can take: set `PARTFINDER_API_KEY` in their environment,
-   and approve the server.
+1. You may add the server to the agent's MCP configuration yourself, such as a project's `.mcp.json`,
+   with the server address only.
+2. Tell your person the steps only they can take: approve the server, and sign in to PartFinder in
+   their browser.
 
-Over MCP, a job tool (`searchParts`, `compareParts`, `analyzeBom`) answers with the job's `id` and the
-seconds to wait. Then call `getSearch`, `getComparison` or `getBom` with that `id` until `status` is no
-longer `processing`.
+Your person can use an API key instead, with the header `Authorization: Bearer <key>` and the key read
+from the `PARTFINDER_API_KEY` environment variable. Then the configuration only refers to the variable:
+`"Authorization": "Bearer ${PARTFINDER_API_KEY}"`. Never ask for the key in the chat and never write the
+key into a file. Never put it in a `claude mcp add` command either: the shell replaces
+`$PARTFINDER_API_KEY` with the key, and the key is then stored in the configuration.
+
+Over MCP, a job tool (`searchParts`, `compareParts`, `analyzeBom`) answers at once with the job's `id`.
+Call `getSearch`, `getComparison` or `getBom` with that `id` right away. It waits while the job runs and
+returns when the job ends, or after 45 seconds with `status` `processing`. While `status` is
+`processing`, call it again.
 
 ## Example: research a part
 
